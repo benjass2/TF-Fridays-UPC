@@ -1,7 +1,5 @@
 #pragma once
-#include <string>
-#include <iostream>
-using namespace std;
+#include "Funcionalidades.hpp"
 
 class Cliente {
 private:
