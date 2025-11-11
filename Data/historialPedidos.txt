@@ -1,0 +1,2 @@
+# Historial de Pedidos - Fridays Restaurant
+# Formato: PedidoID,ClienteNombre,ClienteDNI,ClienteTelefono,ClienteDireccion,Total,Fecha,Estado,TipoServicio,TipoComprobante,NumComprobante

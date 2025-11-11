@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Dominio">
+      <UniqueIdentifier>{2b2d83ae-62f5-44b9-a312-b8ee808a4cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Extras">
+      <UniqueIdentifier>{1b076616-96f7-4cc4-8971-7c02eca8f115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Estructura de Datos">
+      <UniqueIdentifier>{ed92fc7e-629e-4d23-88cb-406be06c411a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Reporte">
+      <UniqueIdentifier>{0ca51457-d7e7-4167-accc-d26ee745dad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Servicio">
+      <UniqueIdentifier>{669779bf-7f78-4ed9-8abb-c64ec83330d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Archivos de recursos</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bebida.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Carta.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="CartaDelivery.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="CartaLocal.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Cliente.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatoPrincipal.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Postre.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Producto.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Archivos de encabezado\Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Archivos de encabezado\Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="Pedido.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Reserva.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesa.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="Fridays.hpp">
+      <Filter>Archivos de encabezado\Dominio</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsolaColor.hpp">
+      <Filter>Archivos de encabezado\Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="Funcionalidades.hpp">
+      <Filter>Archivos de encabezado\Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilidadesConsola.hpp">
+      <Filter>Archivos de encabezado\Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="ArbolBST.hpp">
+      <Filter>Archivos de encabezado\Estructura de Datos</Filter>
+    </ClInclude>
+    <ClInclude Include="Cola.hpp">
+      <Filter>Archivos de encabezado\Estructura de Datos</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.hpp">
+      <Filter>Archivos de encabezado\Estructura de Datos</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaMenu.hpp">
+      <Filter>Archivos de encabezado\Estructura de Datos</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodo.hpp">
+      <Filter>Archivos de encabezado\Estructura de Datos</Filter>
+    </ClInclude>
+    <ClInclude Include="Pila.hpp">
+      <Filter>Archivos de encabezado\Estructura de Datos</Filter>
+    </ClInclude>
+    <ClInclude Include="GestorArchivos.hpp">
+      <Filter>Archivos de encabezado\Reporte</Filter>
+    </ClInclude>
+    <ClInclude Include="GestorPagos.hpp">
+      <Filter>Archivos de encabezado\Reporte</Filter>
+    </ClInclude>
+    <ClInclude Include="GestorPedidos.hpp">
+      <Filter>Archivos de encabezado\Reporte</Filter>
+    </ClInclude>
+    <ClInclude Include="GestorReserva.hpp">
+      <Filter>Archivos de encabezado\Reporte</Filter>
+    </ClInclude>
+    <ClInclude Include="Boleta.hpp">
+      <Filter>Archivos de encabezado\Servicio</Filter>
+    </ClInclude>
+    <ClInclude Include="Comprobante.hpp">
+      <Filter>Archivos de encabezado\Servicio</Filter>
+    </ClInclude>
+    <ClInclude Include="Factura.hpp">
+      <Filter>Archivos de encabezado\Servicio</Filter>
+    </ClInclude>
+    <ClInclude Include="Pago.hpp">
+      <Filter>Archivos de encabezado\Servicio</Filter>
+    </ClInclude>
+    <ClInclude Include="PagoEfectivo.hpp">
+      <Filter>Archivos de encabezado\Servicio</Filter>
+    </ClInclude>
+    <ClInclude Include="PagoTarjeta.hpp">
+      <Filter>Archivos de encabezado\Servicio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TF_Fridays.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
