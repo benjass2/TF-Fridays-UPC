@@ -140,6 +140,7 @@
     <ClInclude Include="Fridays.hpp" />
     <ClInclude Include="Funcionalidades.hpp" />
     <ClInclude Include="GestorArchivos.hpp" />
+    <ClInclude Include="GestorOrdenamiento.hpp" />
     <ClInclude Include="GestorPagos.hpp" />
     <ClInclude Include="GestorPedidos.hpp" />
     <ClInclude Include="GestorReserva.hpp" />

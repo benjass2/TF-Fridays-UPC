@@ -1,5 +1,6 @@
 #pragma once
 #include "Nodo.hpp"
+#include "GestorOrdenamiento.hpp"
 #include <iostream>
 #include <functional>
 using namespace std;
@@ -69,6 +70,7 @@ public:
     void insertarEnPosicion(int posicion, T elemento) {
         if (posicion < 0 || posicion > tamaño) {
             cout << "Posicion fuera de rango" << endl;
+            return;
         }
 
         if (posicion == 0) {
@@ -101,21 +103,17 @@ public:
         Nodo<T>* actual = cabeza;
         while (actual != nullptr) {
             if (actual->getData() == elemento) {
-                // Caso: es el único nodo
                 if (actual == cabeza && actual == cola) {
                     cabeza = cola = nullptr;
                 }
-                // Caso: es el primer nodo
                 else if (actual == cabeza) {
                     cabeza = cabeza->getSiguiente();
                     cabeza->setAnterior(nullptr);
                 }
-                // Caso: es el último nodo
                 else if (actual == cola) {
                     cola = cola->getAnterior();
                     cola->setSiguiente(nullptr);
                 }
-                // Caso: está en el medio
                 else {
                     actual->getAnterior()->setSiguiente(actual->getSiguiente());
                     actual->getSiguiente()->setAnterior(actual->getAnterior());
@@ -151,21 +149,17 @@ public:
             }
         }
 
-
         if (actual == cabeza && actual == cola) {
             cabeza = cola = nullptr;
         }
-
         else if (actual == cabeza) {
             cabeza = cabeza->getSiguiente();
             cabeza->setAnterior(nullptr);
         }
-
         else if (actual == cola) {
             cola = cola->getAnterior();
             cola->setSiguiente(nullptr);
         }
-
         else {
             actual->getAnterior()->setSiguiente(actual->getSiguiente());
             actual->getSiguiente()->setAnterior(actual->getAnterior());
@@ -186,21 +180,17 @@ public:
             Nodo<T>* siguiente = actual->getSiguiente();
 
             if (condicion(actual->getData())) {
-                // Caso: es el único nodo
                 if (actual == cabeza && actual == cola) {
                     cabeza = cola = nullptr;
                 }
-                // Caso: es el primer nodo
                 else if (actual == cabeza) {
                     cabeza = cabeza->getSiguiente();
                     cabeza->setAnterior(nullptr);
                 }
-                // Caso: es el último nodo
                 else if (actual == cola) {
                     cola = cola->getAnterior();
                     cola->setSiguiente(nullptr);
                 }
-                // Caso: está en el medio
                 else {
                     actual->getAnterior()->setSiguiente(actual->getSiguiente());
                     actual->getSiguiente()->setAnterior(actual->getAnterior());
@@ -231,10 +221,10 @@ public:
     T obtenerEnPosicion(int posicion) const {
         if (posicion < 0 || posicion >= tamaño) {
             cout << "Posicion fuera de rango" << endl;
+            throw out_of_range("Posicion fuera de rango");
         }
 
         Nodo<T>* actual;
-
 
         if (posicion < tamaño / 2) {
             actual = cabeza;
@@ -255,6 +245,7 @@ public:
     T obtenerPrimero() const {
         if (cabeza == nullptr) {
             cout << "Lista vacia" << endl;
+            throw runtime_error("Lista vacia");
         }
         return cabeza->getData();
     }
@@ -262,6 +253,7 @@ public:
     T obtenerUltimo() const {
         if (cola == nullptr) {
             cout << "Lista vacia" << endl;
+            throw runtime_error("Lista vacia");
         }
         return cola->getData();
     }
@@ -308,61 +300,21 @@ public:
         }
         return resultado;
     }
-    void ordenar(function<bool(const T&, const T&)> comparador) {
+
+   
+
+    void ordenar(function<bool(const T&, const T&)> comparador,
+        typename GestorOrdenamiento<T>::Algoritmo algoritmo = GestorOrdenamiento<T>::MERGE_SORT) {
         if (tamaño <= 1) return;
-
-        cabeza = mergeSort(cabeza, comparador);
-
-        // Actualizar cola
-        Nodo<T>* temp = cabeza;
-        while (temp->getSiguiente() != nullptr) {
-            temp = temp->getSiguiente();
-        }
-        cola = temp;
+        GestorOrdenamiento<T>::ordenar(cabeza, cola, comparador, algoritmo);
     }
 
-    Nodo<T>* mergeSort(Nodo<T>* head, function<bool(const T&, const T&)> comparador) {
-        if (!head || !head->getSiguiente()) return head;
+   
+   /* void ordenarMergeSort(function<bool(const T&, const T&)> comparador) {
+        ordenar(comparador, GestorOrdenamiento<T>::MERGE_SORT);
+    }*/
 
-        Nodo<T>* middle = dividir(head);
-        Nodo<T>* mitad_derecha = middle->getSiguiente();
-        middle->setSiguiente(nullptr);
-
-        Nodo<T>* izquierda = mergeSort(head, comparador);
-        Nodo<T>* derecha = mergeSort(mitad_derecha, comparador);
-
-        return merge(izquierda, derecha, comparador);
-    }
-
-    Nodo<T>* merge(Nodo<T>* izquierda, Nodo<T>* derecha, function<bool(const T&, const T&)> comparador) {
-        if (!izquierda) return derecha;
-        if (!derecha) return izquierda;
-
-        Nodo<T>* resultado = nullptr;
-
-        if (comparador(izquierda->getData(), derecha->getData())) {
-            resultado = izquierda;
-            resultado->setSiguiente(merge(izquierda->getSiguiente(), derecha, comparador));
-            if (resultado->getSiguiente()) resultado->getSiguiente()->setAnterior(resultado);
-        }
-        else {
-            resultado = derecha;
-            resultado->setSiguiente(merge(izquierda, derecha->getSiguiente(), comparador));
-            if (resultado->getSiguiente()) resultado->getSiguiente()->setAnterior(resultado);
-        }
-        return resultado;
-    }
-
-    Nodo<T>* dividir(Nodo<T>* head) {
-        Nodo<T>* lento = head;
-        Nodo<T>* rapido = head->getSiguiente();
-
-        while (rapido && rapido->getSiguiente()) {
-            lento = lento->getSiguiente();
-            rapido = rapido->getSiguiente()->getSiguiente();
-        }
-        return lento;
-    }
+    
 
 private:
     void limpiar() {

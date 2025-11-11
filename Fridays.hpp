@@ -911,7 +911,8 @@ public:
         else if (tipoComprobante == 2) {
             // FACTURA - Solicitar RUC y Razón Social
             string ruc, razonSocial;
-
+            
+			limpiarPantalla();
             cout << "\nDATOS PARA FACTURA " << endl;
             imprimirSeparadorRojoBlanco(20);
             cout << "Ingrese RUC (11 digitos): ";

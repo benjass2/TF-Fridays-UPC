@@ -1,58 +1,60 @@
 # Menu Fridays Restaurant
 # Formato: ID,Nombre,Precio,Categoria,Disponible
-11,Pollo Frito,4,plato,1
-22,Agua Mineral,6,bebida,1
-40,Agua con Gas,7,bebida,1
-16,Gaseosa de Naranja,7,bebida,1
-4,Coca Cola,8,bebida,1
-14,Fanta,8,bebida,1
-115,Capuchino Frio,9,bebida,1
-111,Empanadas de Carne,10,plato,1
-118,Flan Casero,11,postre,1
-34,Jugo de Maracuya,11,bebida,1
-26,Jugo de Naranja,11,bebida,1
-41,Jugo de Mango,13,bebida,1
-112,Smoothie de Mango,14,bebida,1
-6,Brownie Oreo,16,postre,1
-90,Bacalaos,17,plato,1
-114,Croquetas de Jamon,18,plato,1
-7,Cheesecake,18,postre,1
-91,Tiramisu Clasico,18,postre,1
+110,Pulpo a la Parrilla,68,plato,1
+99,Rib Eye Steak,65,plato,1
+205,llantin,56,plato,1
+108,Langosta Termidor,55,plato,1
+320,Pescado Frito Entero,48,plato,1
+107,Ensalada de Quinoa,46,plato,1
+37,Costilla de Cerdo,45,plato,1
+116,Risotto de Setas,44,plato,1
+106,Bistec a Caballo,43,plato,1
+97,Salmon a la Plancha,42,plato,1
+105,Jugo Verde Detox,41,bebida,1
+324,Cordon Bleu,41,plato,1
+300,Arroz a la cusque a,40,plato,1
+100,Tabla de Quesos y Embutidos,40,plato,1
+12,Lomo Saltado,39,plato,1
+30,Ceviche,38,plato,1
+104,Crema Catalana,36,postre,1
+306,Pollo a la Brasa,35,plato,1
+3,Costillas BBQ,35,plato,1
+17,Sushi Roll,32,plato,1
+102,Tostadas Francesas,31,plato,1
+33,Doble Hamburguesa,30,plato,1
+311,Tostada Francesa Deluxe,29,plato,1
+28,Pasta Carbonara,29,plato,1
+117,Pinacolada,29,bebida,1
+1,Hamburguesa Jack Daniel's,28,plato,1
+31,Chifa,28,plato,1
+313,Cheeseburger Clasica,26,plato,1
+200,Papa a la huancaina,25,plato,1
+25,Ensalada Cesar,25,plato,1
+74,Papa rellena,25,plato,1
+2,Alitas Buffalo,24,plato,1
+44,wasd,22,plato,1
+9,Quesadillas,22,plato,1
+39,Red Velvet,21,postre,1
 27,Sandwich de Pollo,19,plato,1
 13,Tarta de Manzana,19,postre,1
-92,Aros de Cebolla,20,plato,1
-39,Red Velvet,21,postre,1
-9,Quesadillas,22,plato,1
-93,Malteada de Vainilla,23,bebida,1
-2,Alitas Buffalo,24,plato,1
-74,Papa rellena,25,plato,1
-25,Ensalada Cesar,25,plato,1
-200,Papa a la huancaina,25,plato,1
-95,Frappuccino Caramelo,27,bebida,1
-31,Chifa,28,plato,1
-1,Hamburguesa Jack Daniel's,28,plato,1
-117,Pinacolada,29,bebida,1
-28,Pasta Carbonara,29,plato,1
-33,Doble Hamburguesa,30,plato,1
-102,Tostadas Francesas,31,plato,1
-17,Sushi Roll,32,plato,1
-103,Daiquiri de Fresa,33,bebida,1
-3,Costillas BBQ,35,plato,1
-104,Crema Catalana,36,postre,1
-30,Ceviche,38,plato,1
-12,Lomo Saltado,39,plato,1
-100,Tabla de Quesos y Embutidos,40,plato,1
-300,Arroz a la cusque a,40,plato,1
-105,Jugo Verde Detox,41,bebida,1
-97,Salmon a la Plancha,42,plato,1
-106,Bistec a Caballo,43,plato,1
-116,Risotto de Setas,44,plato,1
-37,Costilla de Cerdo,45,plato,1
-107,Ensalada de Quinoa,46,plato,1
-120,Chardonay (Copa),52,bebida,1
-108,Langosta Termidor,55,plato,1
-205,llantin,56,plato,1
-109,Tequila Sunrise,59,bebida,1
-99,Rib Eye Steak,65,plato,1
-110,Pulpo a la Parrilla,68,plato,1
-44,wasd,22,plato,1
+7,Cheesecake,18,postre,1
+114,Croquetas de Jamon,18,plato,1
+91,Tiramisu Clasico,18,postre,1
+318,Torta de Zanahoria,17,postre,1
+90,Bacalaos,17,plato,1
+309,Wrap de Vegetales,16,plato,1
+6,Brownie Oreo,16,postre,1
+41,Jugo de Mango,13,bebida,1
+316,Jugo de Fresa,11,bebida,1
+34,Jugo de Maracuya,11,bebida,1
+118,Flan Casero,11,postre,1
+26,Jugo de Naranja,11,bebida,1
+111,Empanadas de Carne,10,plato,1
+310,Pan de Ajo,8,plato,1
+4,Coca Cola,8,bebida,1
+14,Fanta,8,bebida,1
+322,Agua de Jamaica,7,bebida,1
+16,Gaseosa de Naranja,7,bebida,1
+40,Agua con Gas,7,bebida,1
+22,Agua Mineral,6,bebida,1
+11,Pollo Frito,4,plato,1

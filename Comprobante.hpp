@@ -44,6 +44,7 @@ public:
 
     void mostrarEncabezado() const {
         cout << "\n";
+		imprimirSeparadorRojoBlanco(29);
 
         cout << "                   RESTAURANTE FRIDAYS                           " << endl;
         cout << "                    RUC: 20123456789                              " << endl;
