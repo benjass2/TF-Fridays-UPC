@@ -1,3 +1,2 @@
 # Historial de Pedidos - Fridays Restaurant
 # Formato: PedidoID,ClienteNombre,ClienteDNI,ClienteTelefono,ClienteDireccion,Total,Fecha,Estado,TipoServicio,TipoComprobante,NumComprobante
-1,Benja 123,132,312,,109,11/11/2025,completado,local,FACTURA ELECTRONICA,1

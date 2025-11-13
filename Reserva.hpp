@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include "Funcionalidades.hpp"
 #include "UtilidadesConsola.hpp"
 #include "Cliente.hpp"
@@ -37,14 +37,16 @@ public:
     Reserva() : codigoReserva(""), numeroPersonas(0), estado("Pendiente"), observaciones("") {
     }
 
-    // Constructor con par·metros (genera cÛdigo autom·tico)
+    // Constructor con par√°metros (genera c√≥digo autom√°tico)
     Reserva(const Cliente& cli, const Mesa& m, string f, string h, int numPers, string obs = "")
         : cliente(cli), mesa(m), fecha(f), hora(h),
         numeroPersonas(numPers), estado("Pendiente"), observaciones(obs) {
+
+       
         codigoReserva = generarCodigoReserva();
     }
 
-    // Constructor con cÛdigo especÌfico (para cargar desde archivo)
+    // Constructor con c√≥digo espec√≠fico (para cargar desde archivo)
     Reserva(string codigo, const Cliente& cli, const Mesa& m, string f, string h, int numPers, string est, string obs = "")
         : codigoReserva(codigo), cliente(cli), mesa(m), fecha(f), hora(h),
         numeroPersonas(numPers), estado(est), observaciones(obs) {
@@ -100,10 +102,10 @@ public:
     //Mostrar informacion completa de reserva
     void mostrarInfo() const {
 
-        cout << ROJO << "INFORMACI”N DE LA RESERVA" << RESET << endl;
+        cout << ROJO << "INFORMACI√ìN DE LA RESERVA" << RESET << endl;
         imprimirSeparadorRojoBlanco(30);
 
-        cout << " CÛdigo: " << codigoReserva << endl;
+        cout << " C√≥digo: " << codigoReserva << endl;
         cout << " Estado: ";
 
         // Mostrar estado con indicador visual
@@ -118,7 +120,7 @@ public:
         imprimirSeparadorRojoBlanco(20);
         cout << " Nombre: " << cliente.getNombreCompleto() << endl;
         cout << " DNI: " << cliente.getDni() << endl;
-        cout << " TelÈfono: " << cliente.getTelefono() << endl;
+        cout << " Tel√©fono: " << cliente.getTelefono() << endl;
 
         cout << " DETALLES DE LA RESERVA:" << endl;
         cout << " Fecha: " << fecha << endl;
@@ -148,7 +150,7 @@ public:
 
     //operadores para comparacion en arboles
 
-    // Comparar por fecha y hora (para ordenar cronolÛgicamente)
+    // Comparar por fecha y hora (para ordenar cronol√≥gicamente)
     bool operator<(const Reserva& otra) const {
         // Primero comparar por fecha
         if (fecha != otra.fecha) {
@@ -184,28 +186,42 @@ public:
 
 
     // Comparar fechas en formato DD/MM/YYYY
-
     static int compararFechas(const string& f1, const string& f2) {
-        // Extraer dÌa, mes, aÒo de f1
-        int dia1 = stoi(f1.substr(0, 2));
-        int mes1 = stoi(f1.substr(3, 2));
-        int anio1 = stoi(f1.substr(6, 4));
+        // Validar longitud de las fechas
+        if (f1.length() < 10 || f2.length() < 10) {
+            // Si alguna fecha es inv√°lida, considerar la m√°s corta como menor
+            if (f1.length() != f2.length()) {
+                return (f1.length() < f2.length()) ? -1 : 1;
+            }
+            return 0; // Ambas inv√°lidas, considerarlas iguales
+        }
 
-        // Extraer dÌa, mes, aÒo de f2
-        int dia2 = stoi(f2.substr(0, 2));
-        int mes2 = stoi(f2.substr(3, 2));
-        int anio2 = stoi(f2.substr(6, 4));
+        try {
+            // Extraer d√≠a, mes, a√±o de f1
+            int dia1 = stoi(f1.substr(0, 2));
+            int mes1 = stoi(f1.substr(3, 2));
+            int anio1 = stoi(f1.substr(6, 4));
 
-        // Comparar aÒo
-        if (anio1 != anio2) return (anio1 < anio2) ? -1 : 1;
+            // Extraer d√≠a, mes, a√±o de f2
+            int dia2 = stoi(f2.substr(0, 2));
+            int mes2 = stoi(f2.substr(3, 2));
+            int anio2 = stoi(f2.substr(6, 4));
 
-        // Comparar mes
-        if (mes1 != mes2) return (mes1 < mes2) ? -1 : 1;
+            // Comparar a√±o
+            if (anio1 != anio2) return (anio1 < anio2) ? -1 : 1;
 
-        // Comparar dÌa
-        if (dia1 != dia2) return (dia1 < dia2) ? -1 : 1;
+            // Comparar mes
+            if (mes1 != mes2) return (mes1 < mes2) ? -1 : 1;
 
-        return 0; // Son iguales
+            // Comparar d√≠a
+            if (dia1 != dia2) return (dia1 < dia2) ? -1 : 1;
+
+            return 0; // Son iguales
+        }
+        catch (const exception& e) {
+            // En caso de error de conversi√≥n, retornar 0 (iguales)
+            return 0;
+        }
     }
 
 

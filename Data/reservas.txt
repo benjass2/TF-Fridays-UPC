@@ -1,3 +1,5 @@
 # Reservas - Fridays Restaurant
 # Formato: CodigoReserva,ClienteID,ClienteNombre,ClienteApellido,ClienteDNI,ClienteTelefono,NumeroMesa,CapacidadMesa,UbicacionMesa,TipoMesa,Fecha,Hora,NumPersonas,Estado,Observaciones
 RES001,1,1,1,1,1,1,4,Interior,Regular,1,1,1,Pendiente,1
+RES001,1,Benja,solor,554636,63536635,2,4,Interior,Regular,12121212,1212,3,Pendiente,con bebe
+RES001,1,1,1,1,11,1,4,Interior,Regular,01/01/2025,1200,3,Pendiente,con bebe

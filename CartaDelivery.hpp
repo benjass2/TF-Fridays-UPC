@@ -27,7 +27,7 @@ public:
                 productos.insertarFinal(p);
             }
         }
-        actualizarIndices();  // ? AGREGAR ESTA LÍNEA
+        actualizarIndices();  
         cout << ">>> Carta Delivery: " << productos.getTamaño() << " productos cargados (filtrados)" << endl;
     }
 
