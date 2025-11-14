@@ -44,6 +44,37 @@ namespace ConsolaColor {
     const std::string SUBRAYADO = "\033[4m";
     const std::string INVERTIR_COLOR = "\033[7m"; // Invierte el color de fondo y primer plano.
 
+
+    // ===================================
+    // COLORES DE FONDO (Background Standard)
+    // ===================================
+
+    const std::string FONDO_NEGRO = "\033[40m";
+    const std::string FONDO_ROJO = "\033[41m";
+    const std::string FONDO_VERDE = "\033[42m";
+    const std::string FONDO_AMARILLO = "\033[43m";
+    const std::string FONDO_AZUL = "\033[44m";
+    const std::string FONDO_MAGENTA = "\033[45m";
+    const std::string FONDO_CIAN = "\033[46m";
+    const std::string FONDO_BLANCO = "\033[47m";
+
+    // ===================================
+    // COLORES DE FONDO (Background Brillante/Bright)
+    // ===================================
+
+    const std::string FONDO_NEGRO_BRILLANTE = "\033[100m";
+    const std::string FONDO_ROJO_BRILLANTE = "\033[101m";
+    const std::string FONDO_VERDE_BRILLANTE = "\033[102m";
+    const std::string FONDO_AMARILLO_BRILLANTE = "\033[103m";
+    const std::string FONDO_AZUL_BRILLANTE = "\033[104m";
+    const std::string FONDO_MAGENTA_BRILLANTE = "\033[105m";
+    const std::string FONDO_CIAN_BRILLANTE = "\033[106m";
+    const std::string FONDO_BLANCO_BRILLANTE = "\033[107m";
+
+    const std::string BORRAR_PANTALLA = "\033[2J\033[H";
+
+
+
     // ===================================
     // FUNCIONES AUXILIARES (Opcional, pero útil)
     // ===================================

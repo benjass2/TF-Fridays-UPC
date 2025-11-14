@@ -1,6 +1,9 @@
 #pragma once
 #include "Nodo.hpp"
 #include "Funcionalidades.hpp"
+#include <vector>
+#include <functional>
+
 using namespace std;
 
 template<typename T>
@@ -9,13 +12,13 @@ public:
     enum Algoritmo {
         MERGE_SORT,
         QUICK_SORT,
-        BUBBLE_SORT
+        HEAP_SORT
     };
-
-    // Método principal para ordenar
+    //Con esta funcion se ordena segun el algoritmo que se le pasemos
     static void ordenar(Nodo<T>*& cabeza, Nodo<T>*& cola,
         function<bool(const T&, const T&)> comparador,
         Algoritmo algoritmo = MERGE_SORT) {
+
         if (!cabeza || !cabeza->getSiguiente()) return;
 
         switch (algoritmo) {
@@ -25,8 +28,8 @@ public:
         case QUICK_SORT:
             quickSortWrapper(cabeza, cola, comparador);
             break;
-        case BUBBLE_SORT:
-            bubbleSort(cabeza, comparador);
+        case HEAP_SORT:
+            heapSort(cabeza, comparador);
             break;
         }
 
@@ -34,7 +37,7 @@ public:
     }
 
 private:
-    
+
     static void actualizarCola(Nodo<T>* cabeza, Nodo<T>*& cola) {
         if (!cabeza) {
             cola = nullptr;
@@ -48,7 +51,6 @@ private:
         cola = temp;
     }
 
-    //Algoritmo Merge Sort
     static Nodo<T>* mergeSort(Nodo<T>* head, function<bool(const T&, const T&)> comparador) {
         if (!head || !head->getSiguiente()) return head;
 
@@ -100,7 +102,6 @@ private:
         return lento;
     }
 
-	//Algoritmo Quick Sort
     static void quickSortWrapper(Nodo<T>*& cabeza, Nodo<T>*& cola,
         function<bool(const T&, const T&)> comparador) {
         quickSort(cabeza, cola, comparador);
@@ -135,7 +136,6 @@ private:
                     i = i->getSiguiente();
                 }
 
-                // Intercambiar datos
                 T temp = i->getData();
                 i->setData(j->getData());
                 j->setData(temp);
@@ -149,7 +149,6 @@ private:
             i = i->getSiguiente();
         }
 
-        // Intercambiar con el pivote
         T temp = i->getData();
         i->setData(cola->getData());
         cola->setData(temp);
@@ -157,29 +156,61 @@ private:
         return i;
     }
 
-	//Algoritmo Bubble Sort
-    static void bubbleSort(Nodo<T>* cabeza, std::function<bool(const T&, const T&)> comparador) {
+    static void heapify(vector<T>& datos, int n, int i, function<bool(const T&, const T&)> comparador) {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && comparador(datos[largest], datos[left])) {
+            largest = left;
+        }
+
+        if (right < n && comparador(datos[largest], datos[right])) {
+            largest = right;
+        }
+
+        if (largest != i) {
+            T temp = datos[i];
+            datos[i] = datos[largest];
+            datos[largest] = temp;
+
+            heapify(datos, n, largest, comparador);
+        }
+    }
+
+    static void construirHeapManual(vector<T>& datos, function<bool(const T&, const T&)> comparador) {
+        int n = datos.size();
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(datos, n, i, comparador);
+        }
+    }
+
+    static void heapSort(Nodo<T>* cabeza, function<bool(const T&, const T&)> comparador) {
         if (!cabeza) return;
 
-        bool intercambiado;
-        Nodo<T>* actual;
-        Nodo<T>* ultimo = nullptr;
+        vector<T> datos;
+        Nodo<T>* actual = cabeza;
+        while (actual != nullptr) {
+            datos.push_back(actual->getData());
+            actual = actual->getSiguiente();
+        }
 
-        do {
-            intercambiado = false;
-            actual = cabeza;
+        int n = datos.size();
 
-            while (actual->getSiguiente() != ultimo) {
-                if (!comparador(actual->getData(), actual->getSiguiente()->getData())) {
-                    // Intercambiar datos
-                    T temp = actual->getData();
-                    actual->setData(actual->getSiguiente()->getData());
-                    actual->getSiguiente()->setData(temp);
-                    intercambiado = true;
-                }
-                actual = actual->getSiguiente();
-            }
-            ultimo = actual;
-        } while (intercambiado);
+        construirHeapManual(datos, comparador);
+
+        for (int i = n - 1; i > 0; i--) {
+            T temp = datos[0];
+            datos[0] = datos[i];
+            datos[i] = temp;
+
+            heapify(datos, i, 0, comparador);
+        }
+
+        actual = cabeza;
+        for (const T& datoOrdenado : datos) {
+            actual->setData(datoOrdenado);
+            actual = actual->getSiguiente();
+        }
     }
 };

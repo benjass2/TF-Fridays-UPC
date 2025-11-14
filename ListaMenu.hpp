@@ -309,12 +309,6 @@ public:
         GestorOrdenamiento<T>::ordenar(cabeza, cola, comparador, algoritmo);
     }
 
-   
-   /* void ordenarMergeSort(function<bool(const T&, const T&)> comparador) {
-        ordenar(comparador, GestorOrdenamiento<T>::MERGE_SORT);
-    }*/
-
-    
 
 private:
     void limpiar() {
