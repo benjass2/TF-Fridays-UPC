@@ -390,18 +390,19 @@ public:
             cout << "  6. Agregar producto" << endl;
             cout << "  7. Eliminar producto" << endl;
             cout << "  8. Buscar producto" << endl;
+            cout << "  9. Modificar producto" << endl;
             cout << AMARILLO << "\n   GESTION DE RESERVAS " << RESET << endl;  // ← NUEVO
             cout << BLANCO;
-            cout << "  9. Ver todas las reservas" << endl;
-            cout << "  10. Buscar reserva por codigo" << endl;
-            cout << "  11. Reservas del dia" << endl;
-            cout << "  12. Cancelar reserva" << endl;
-            cout << "  13. Estadisticas de reservas" << endl;
-            cout << "  14. Ver todas las mesas" << endl;
+            cout << "  10. Ver todas las reservas" << endl;
+            cout << "  11. Buscar reserva por codigo" << endl;
+            cout << "  12. Reservas del dia" << endl;
+            cout << "  13. Cancelar reserva" << endl;
+            cout << "  14. Estadisticas de reservas" << endl;
+            cout << "  15. Ver todas las mesas" << endl;
             cout << AMARILLO << "\n   SISTEMA " << endl;
             cout << BLANCO;
-            cout << "  15. Info del restaurante" << endl;
-            cout << "  16. Volver" << endl;
+            cout << "  16. Info del restaurante" << endl;
+            cout << "  17. Volver" << endl;
             cout << endl;
             imprimirSeparadorRojoBlanco(20);
             cout << "Opcion: ";
@@ -642,18 +643,103 @@ public:
 
             break;
 
+            case 9:  // MODIFICAR PRODUCTO
+            {
+                limpiarPantalla();
+                cout << ROJO << "MODIFICAR PRODUCTO" << endl;
+                imprimirSeparadorRojoBlanco(20);
+
+                int id;
+                cout << "\nIngrese ID del producto a modificar: ";
+                cin >> id;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                // Buscar el producto
+                Producto* producto = getMenu()->buscarPlato(id);
+                if (producto == nullptr) {
+                    cout << ROJO << "\n Error: Producto no encontrado" << RESET << endl;
+                    pausar();
+                    break;
+                }
+
+                // Mostrar datos actuales
+                cout << VERDE << "\n>>> Producto encontrado:" << RESET << endl;
+                cout << "ID: " << producto->getId() << endl;
+                cout << "Nombre actual: " << producto->getNombre() << endl;
+                cout << "Precio actual: S/" << fixed << setprecision(2) << producto->getPrecio() << endl;
+                cout << "Categoria actual: " << producto->getCategoria() << endl;
+                cout << "Disponible: " << (producto->isDisponible() ? "Si" : "No") << endl;
+                cout << endl;
+
+                // Solicitar nuevos datos
+                string nuevoNombre;
+                double nuevoPrecio;
+                string nuevaCategoria;
+                char disponible;
+
+                cout << AMARILLO << ">>> Ingrese los nuevos datos:" << RESET << endl;
+                cout << "Nuevo nombre (Enter para mantener actual): ";
+                getline(cin, nuevoNombre);
+                if (nuevoNombre.empty()) {
+                    nuevoNombre = producto->getNombre();
+                }
+
+                cout << "Nuevo precio (0 para mantener actual): ";
+                cin >> nuevoPrecio;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                if (nuevoPrecio <= 0) {
+                    nuevoPrecio = producto->getPrecio();
+                }
+
+                cout << "Nueva categoria (plato/bebida/postre, Enter para mantener actual): ";
+                getline(cin, nuevaCategoria);
+                if (nuevaCategoria.empty()) {
+                    nuevaCategoria = producto->getCategoria();
+                }
+
+                cout << "¿Disponible? (s/n): ";
+                cin >> disponible;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                bool nuevaDisponibilidad = (disponible == 's' || disponible == 'S');
+
+                // Confirmar modificación
+                cout << "\n¿Confirmar modificacion? (s/n): ";
+                char confirmar;
+                cin >> confirmar;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                if (confirmar == 's' || confirmar == 'S') {
+                    bool exito = getMenu()->modificarProducto(id, nuevoNombre, nuevoPrecio,
+                                                             nuevaCategoria, nuevaDisponibilidad);
+                    if (exito) {
+                        this->guardarDatos();
+                        cout << VERDE << "\n Producto modificado exitosamente!" << RESET << endl;
+                    }
+                    else {
+                        cout << ROJO << "\n Error al modificar producto" << RESET << endl;
+                    }
+                }
+                else {
+                    cout << "\nOperacion cancelada." << endl;
+                }
+
+                delete producto;
+                pausar();
+            }
+            break;
+
 
             //    // ========================================
             //    // NUEVOS CASES: GESTIÓN DE RESERVAS
             //    // ========================================
-            case 9: { // Ver todas las reservas
+            case 10: { // Ver todas las reservas
                 limpiarPantalla();
                 gestorReservas->mostrarTodasReservas();
                 pausar();
                 break;
             }
 
-            case 10: { // Buscar reserva
+            case 11: { // Buscar reserva
                 limpiarPantalla();
                 cout << ROJO << "BUSCAR RESERVA" << endl;
                 imprimirSeparadorRojoBlanco(20);
@@ -665,7 +751,7 @@ public:
                 break;
             }
 
-            case 11: { // Reservas del día
+            case 12: { // Reservas del día
                 limpiarPantalla();
                 cout << ROJO << "RESERVAS DEL DIA" << endl;
                 imprimirSeparadorRojoBlanco(20);
@@ -677,7 +763,7 @@ public:
                 break;
             }
 
-            case 12: { // Cancelar reserva
+            case 13: { // Cancelar reserva
                 limpiarPantalla();
                 cout << ROJO << "CANCELAR RESERVA" << endl;
                 imprimirSeparadorRojoBlanco(20);
@@ -689,26 +775,26 @@ public:
                 break;
             }
 
-            case 13: { // Estadísticas
+            case 14: { // Estadísticas
                 limpiarPantalla();
                 gestorReservas->mostrarEstadisticas();
                 pausar();
                 break;
             }
 
-            case 14: { // Ver todas las mesas
+            case 15: { // Ver todas las mesas
                 limpiarPantalla();
                 gestorReservas->listarTodasMesas();
                 pausar();
                 break;
             }
 
-            case 15:  // INFO DEL RESTAURANTE
+            case 16:  // INFO DEL RESTAURANTE
                 limpiarPantalla();
 
                 pausar();
                 break;
-            case 16:  // VOLVER
+            case 17:  // VOLVER
                 break;
 
             default:
@@ -717,7 +803,7 @@ public:
                 break;
             }
 
-        } while (opcion != 16);
+        } while (opcion != 17);
     }
 
     bool procesarPagoPedido(Pedido* pedido, bool esDelivery) {

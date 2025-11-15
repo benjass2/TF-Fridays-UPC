@@ -38,7 +38,7 @@ public:
         indicePorNombre.limpiar();
 
 
-        for (int i = 0; i < productos.getTamaño(); i++) {
+        for (int i = 0; i < productos.getTamaï¿½o(); i++) {
 
             Producto p = productos.obtenerEnPosicion(i);
 
@@ -71,7 +71,7 @@ public:
 
         productos.insertarFinal(producto);
 
-        // Actualizar índices
+        // Actualizar ï¿½ndices
         Producto* copia = new Producto(producto.getId(), producto.getNombre(),
             producto.getPrecio(), producto.getCategoria(),
             producto.isDisponible());
@@ -92,7 +92,7 @@ public:
         bool eliminado = productos.eliminar(temp);
 
         if (eliminado) {
-            actualizarIndices();  // Reconstruir índices
+            actualizarIndices();  // Reconstruir ï¿½ndices
             cout << ">>> Producto removido del menu." << endl;
             return true;
         }
@@ -100,7 +100,39 @@ public:
         return false;
     }
 
-    // Búsqueda O(1) usando HashTable
+    // Modificar producto existente
+    bool modificarProducto(int id, const string& nuevoNombre, double nuevoPrecio,
+                          const string& nuevaCategoria, bool nuevaDisponibilidad) {
+        if (!indicePorID.contiene(id)) {
+            cout << ">>> Producto no encontrado en el menu." << endl;
+            return false;
+        }
+
+        // Buscar y modificar en la lista
+        bool encontrado = false;
+        for (int i = 0; i < productos.getTamaï¿½o(); i++) {
+            Producto& p = productos.obtenerReferencia(i);
+            if (p.getId() == id) {
+                // Actualizar los datos del producto
+                p.setNombre(nuevoNombre);
+                p.setPrecio(nuevoPrecio);
+                p.setCategoria(nuevaCategoria);
+                p.setDisponible(nuevaDisponibilidad);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            actualizarIndices();  // Reconstruir ï¿½ndices con los nuevos datos
+            cout << ">>> Producto modificado exitosamente." << endl;
+            return true;
+        }
+
+        return false;
+    }
+
+    // Bï¿½squeda O(1) usando HashTable
     Producto* buscarPlato(int id) {
         Producto** resultado = indicePorID.buscar(id);
         if (resultado != nullptr) {
@@ -114,7 +146,7 @@ public:
         return nullptr;
     }
 
-    // Búsqueda por nombre exacto - O(1)
+    // Bï¿½squeda por nombre exacto - O(1)
     Producto* buscarPorNombre(const string& nombre) {
         Producto** resultado = indicePorNombre.buscar(nombre);
         if (resultado != nullptr) {
@@ -128,15 +160,15 @@ public:
         return nullptr;
     }
 
-    // Búsqueda parcial (cuando no sabes el nombre completo)
+    // Bï¿½squeda parcial (cuando no sabes el nombre completo)
     ListaMenu<Producto> buscarPorNombreParcial(const string& texto) {
         ListaMenu<Producto> resultados;
 
-        for (int i = 0; i < productos.getTamaño(); i++) {
+        for (int i = 0; i < productos.getTamaï¿½o(); i++) {
             Producto p = productos.obtenerEnPosicion(i);
             string nombre = p.getNombre();
 
-            // Convertir a minúsculas para búsqueda case-insensitive
+            // Convertir a minï¿½sculas para bï¿½squeda case-insensitive
             for (size_t j = 0; j < nombre.length(); j++) {
                 if (nombre[j] >= 'A' && nombre[j] <= 'Z') {
                     nombre[j] = nombre[j] + ('a' - 'A');
@@ -158,7 +190,7 @@ public:
         return resultados;
     }
 
-    // Mostrar estadísticas de rendimiento
+    // Mostrar estadï¿½sticas de rendimiento
     void mostrarEstadisticasHashTable() const {
         cout << "\n=== ESTADISTICAS DE BUSQUEDA ===" << endl;
         cout << "Indice por ID:" << endl;
@@ -185,12 +217,12 @@ public:
             << "ESTADO" << endl;
         imprimirSeparadorRojoBlanco(40);
 
-        for (int i = 0; i < productos.getTamaño(); i++) {
+        for (int i = 0; i < productos.getTamaï¿½o(); i++) {
             cout << productos.obtenerEnPosicion(i) << endl;
         }
         cout << endl;
         imprimirSeparadorRojoBlanco(40);
-        cout << " >>> Total de productos : " << productos.getTamaño() << endl;
+        cout << " >>> Total de productos : " << productos.getTamaï¿½o() << endl;
 
     }
 
@@ -220,7 +252,7 @@ public:
 
 
 
-        for (int i = 0; i < productosFiltrados.getTamaño(); i++) {
+        for (int i = 0; i < productosFiltrados.getTamaï¿½o(); i++) {
             const Producto& p = productosFiltrados.obtenerEnPosicion(i);
 
 
@@ -231,7 +263,7 @@ public:
                 << endl;
         }
         imprimirSeparadorRojoBlanco(40);
-        cout << ">>> Total de productos en la categoria: " << productosFiltrados.getTamaño() << endl;
+        cout << ">>> Total de productos en la categoria: " << productosFiltrados.getTamaï¿½o() << endl;
     }
 
 
@@ -249,12 +281,12 @@ public:
         return productos.filtrar(condicion);
     }
 
-    // Guardar menú en archivo
+    // Guardar menï¿½ en archivo
     void guardarEnArchivo() const {
         GestorArchivos::guardarProductos(productos, archivoMenu);
     }
 
-    // Cargar menú desde archivo
+    // Cargar menï¿½ desde archivo
     void cargarDesdeArchivo() {
         productos = GestorArchivos::cargarProductos(archivoMenu);
     }
@@ -262,7 +294,7 @@ public:
 
 
 
-    int getTotalProductos() const { return productos.getTamaño(); }
+    int getTotalProductos() const { return productos.getTamaï¿½o(); }
     bool estaVacio() const { return productos.estaVacia(); }
     string getTipoServicio() const { return tipoServicio; }
     string getNombreCarta() const { return nombreCarta; }

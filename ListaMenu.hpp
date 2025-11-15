@@ -10,12 +10,12 @@ class ListaMenu {
 private:
     Nodo<T>* cabeza;
     Nodo<T>* cola;
-    int tamaño;
+    int tamaï¿½o;
 
 public:
-    ListaMenu() : cabeza(nullptr), cola(nullptr), tamaño(0) {}
+    ListaMenu() : cabeza(nullptr), cola(nullptr), tamaï¿½o(0) {}
 
-    ListaMenu(const ListaMenu<T>& otra) : cabeza(nullptr), cola(nullptr), tamaño(0) {
+    ListaMenu(const ListaMenu<T>& otra) : cabeza(nullptr), cola(nullptr), tamaï¿½o(0) {
         Nodo<T>* actual = otra.cabeza;
         while (actual != nullptr) {
             insertarFinal(actual->getData());
@@ -50,7 +50,7 @@ public:
             cabeza->setAnterior(nuevo);
             cabeza = nuevo;
         }
-        tamaño++;
+        tamaï¿½o++;
     }
 
     void insertarFinal(T elemento) {
@@ -64,11 +64,11 @@ public:
             nuevo->setAnterior(cola);
             cola = nuevo;
         }
-        tamaño++;
+        tamaï¿½o++;
     }
 
     void insertarEnPosicion(int posicion, T elemento) {
-        if (posicion < 0 || posicion > tamaño) {
+        if (posicion < 0 || posicion > tamaï¿½o) {
             cout << "Posicion fuera de rango" << endl;
             return;
         }
@@ -78,7 +78,7 @@ public:
             return;
         }
 
-        if (posicion == tamaño) {
+        if (posicion == tamaï¿½o) {
             insertarFinal(elemento);
             return;
         }
@@ -94,7 +94,7 @@ public:
         nuevo->setSiguiente(actual);
         actual->getAnterior()->setSiguiente(nuevo);
         actual->setAnterior(nuevo);
-        tamaño++;
+        tamaï¿½o++;
     }
 
     bool eliminar(T elemento) {
@@ -120,7 +120,7 @@ public:
                 }
 
                 delete actual;
-                tamaño--;
+                tamaï¿½o--;
                 return true;
             }
             actual = actual->getSiguiente();
@@ -129,14 +129,14 @@ public:
     }
 
     bool eliminarEnPosicion(int posicion) {
-        if (posicion < 0 || posicion >= tamaño) {
-            cout << "Posición fuera de rango" << endl;
+        if (posicion < 0 || posicion >= tamaï¿½o) {
+            cout << "Posiciï¿½n fuera de rango" << endl;
             return false;
         }
 
         Nodo<T>* actual;
 
-        if (posicion < tamaño / 2) {
+        if (posicion < tamaï¿½o / 2) {
             actual = cabeza;
             for (int i = 0; i < posicion; i++) {
                 actual = actual->getSiguiente();
@@ -144,7 +144,7 @@ public:
         }
         else {
             actual = cola;
-            for (int i = tamaño - 1; i > posicion; i--) {
+            for (int i = tamaï¿½o - 1; i > posicion; i--) {
                 actual = actual->getAnterior();
             }
         }
@@ -166,7 +166,7 @@ public:
         }
 
         delete actual;
-        tamaño--;
+        tamaï¿½o--;
         return true;
     }
 
@@ -197,7 +197,7 @@ public:
                 }
 
                 delete actual;
-                tamaño--;
+                tamaï¿½o--;
                 eliminado = true;
             }
 
@@ -219,14 +219,14 @@ public:
     }
 
     T obtenerEnPosicion(int posicion) const {
-        if (posicion < 0 || posicion >= tamaño) {
+        if (posicion < 0 || posicion >= tamaï¿½o) {
             cout << "Posicion fuera de rango" << endl;
             throw out_of_range("Posicion fuera de rango");
         }
 
         Nodo<T>* actual;
 
-        if (posicion < tamaño / 2) {
+        if (posicion < tamaï¿½o / 2) {
             actual = cabeza;
             for (int i = 0; i < posicion; i++) {
                 actual = actual->getSiguiente();
@@ -234,12 +234,37 @@ public:
         }
         else {
             actual = cola;
-            for (int i = tamaño - 1; i > posicion; i--) {
+            for (int i = tamaï¿½o - 1; i > posicion; i--) {
                 actual = actual->getAnterior();
             }
         }
 
         return actual->getData();
+    }
+
+    // Obtener referencia para modificar el elemento directamente
+    T& obtenerReferencia(int posicion) {
+        if (posicion < 0 || posicion >= tamaï¿½o) {
+            cout << "Posicion fuera de rango" << endl;
+            throw out_of_range("Posicion fuera de rango");
+        }
+
+        Nodo<T>* actual;
+
+        if (posicion < tamaï¿½o / 2) {
+            actual = cabeza;
+            for (int i = 0; i < posicion; i++) {
+                actual = actual->getSiguiente();
+            }
+        }
+        else {
+            actual = cola;
+            for (int i = tamaï¿½o - 1; i > posicion; i--) {
+                actual = actual->getAnterior();
+            }
+        }
+
+        return actual->getDataRef();
     }
 
     T obtenerPrimero() const {
@@ -258,7 +283,7 @@ public:
         return cola->getData();
     }
 
-    int getTamaño() const { return tamaño; }
+    int getTamaï¿½o() const { return tamaï¿½o; }
 
     bool estaVacia() const { return cabeza == nullptr; }
 
@@ -305,7 +330,7 @@ public:
 
     void ordenar(function<bool(const T&, const T&)> comparador,
         typename GestorOrdenamiento<T>::Algoritmo algoritmo = GestorOrdenamiento<T>::MERGE_SORT) {
-        if (tamaño <= 1) return;
+        if (tamaï¿½o <= 1) return;
         GestorOrdenamiento<T>::ordenar(cabeza, cola, comparador, algoritmo);
     }
 
@@ -324,6 +349,6 @@ private:
             delete temp;
         }
         cola = nullptr;
-        tamaño = 0;
+        tamaï¿½o = 0;
     }
 };

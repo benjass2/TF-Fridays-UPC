@@ -17,6 +17,7 @@ public:
     ~Nodo() {}
 
     T getData() const { return data; }
+    T& getDataRef() { return data; }  // Retorna referencia para modificar
     Nodo<T>* getSiguiente() const { return siguiente; }
     Nodo<T>* getAnterior() const { return anterior; }
 
