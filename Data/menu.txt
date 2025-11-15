@@ -32,7 +32,7 @@
 311,Tostada Francesa Deluxe,29,plato,1
 28,Pasta Carbonara,29,plato,1
 117,Pinacolada,29,bebida,1
-1,Hamburguesa Jack Daniel's,28,plato,1
+1,Hamburguesa Jack Daniel's,28,plato,0
 31,Chifa,28,plato,1
 95,Frappuccino Caramelo,27,bebida,1
 313,Cheeseburger Clasica,26,plato,1
@@ -72,7 +72,7 @@
 307,Papas Fritas Clasicas,10,plato,1
 115,Capuchino Frio,9,bebida,1
 310,Pan de Ajo,8,plato,1
-4,Coca Cola,8,bebida,1
+4,Coca Cola,8,plato,0
 14,Fanta,8,bebida,1
 322,Agua de Jamaica,7,bebida,1
 16,Gaseosa de Naranja,7,bebida,1

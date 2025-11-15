@@ -3,29 +3,30 @@
 template<typename T>
 class Nodo {
 private:
-    T data;
+    T dato;
     Nodo<T>* siguiente;
     Nodo<T>* anterior;
 
 public:
     Nodo() : siguiente(nullptr), anterior(nullptr) {}
-    Nodo(T valor) : data(valor), siguiente(nullptr), anterior(nullptr) {}
+    Nodo(T valor) : dato(valor), siguiente(nullptr), anterior(nullptr) {}
     Nodo(T valor, Nodo<T>* sig, Nodo<T>* ant = nullptr)
-        : data(valor), siguiente(sig), anterior(ant) {
+        : dato(valor), siguiente(sig), anterior(ant) {
     }
 
     ~Nodo() {}
 
-    T getData() const { return data; }
+    T getData() const { return dato; }
+    T& getDataRef() { return dato; }
     Nodo<T>* getSiguiente() const { return siguiente; }
     Nodo<T>* getAnterior() const { return anterior; }
 
-    void setData(T valor) { data = valor; }
+    void setData(T valor) { dato = valor; }
     void setSiguiente(Nodo<T>* sig) { siguiente = sig; }
     void setAnterior(Nodo<T>* ant) { anterior = ant; }
 
     bool operator==(const Nodo<T>& otro) const {
-        return data == otro.data;
+        return dato == otro.dato;
     }
 
     bool tieneSiguiente() const { return siguiente != nullptr; }

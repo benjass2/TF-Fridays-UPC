@@ -19,8 +19,8 @@ public:
 
     ~CartaDelivery() {}
 
-    void cargarProductos(const ListaMenu<Producto>& productosExternos) override {
-        productos = ListaMenu<Producto>();
+    void cargarProductos(const Lista<Producto>& productosExternos) override {
+        productos = Lista<Producto>();
         for (int i = 0; i < productosExternos.getTamaño(); i++) {
             Producto p = productosExternos.obtenerEnPosicion(i);
             if (esAptoParaDelivery(p)) {

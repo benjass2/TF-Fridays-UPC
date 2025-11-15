@@ -1,5 +1,5 @@
 #pragma once
-#include "ListaMenu.hpp"
+#include "Lista.hpp"
 #include "Producto.hpp"
 #include "GestorArchivos.hpp"
 #include "HashTable.hpp"
@@ -8,7 +8,7 @@ using namespace UtilidadesConsola;
 
 class Carta {
 protected:
-    ListaMenu<Producto> productos;
+    Lista<Producto> productos;
     string archivoMenu;
     string tipoServicio;
     string nombreCarta;
@@ -100,6 +100,44 @@ public:
         return false;
     }
 
+    // Modificar producto existente
+    bool modificarProducto(int id, const string& nuevoNombre, double nuevoPrecio,
+        const string& nuevaCategoria, bool nuevaDisponibilidad) {
+        if (!indicePorID.contiene(id)) {
+            cout << ">>> Producto no encontrado en el menu." << endl;
+            return false;
+        }
+
+        // Buscar y modificar en la lista
+        bool encontrado = false;
+        for (int i = 0; i < productos.getTamaño(); i++) {
+            Producto& p = productos.obtenerReferencia(i);
+            if (p.getId() == id) {
+                // Actualizar los datos del producto
+                p.setNombre(nuevoNombre);
+                p.setPrecio(nuevoPrecio);
+                p.setCategoria(nuevaCategoria);
+                p.setDisponible(nuevaDisponibilidad);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            actualizarIndices();  // Reconstruir índices con los nuevos datos
+            cout << ">>> Producto modificado exitosamente." << endl;
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+
+
+
     // Búsqueda O(1) usando HashTable
     Producto* buscarPlato(int id) {
         Producto** resultado = indicePorID.buscar(id);
@@ -129,8 +167,8 @@ public:
     }
 
     // Búsqueda parcial (cuando no sabes el nombre completo)
-    ListaMenu<Producto> buscarPorNombreParcial(const string& texto) {
-        ListaMenu<Producto> resultados;
+    Lista<Producto> buscarPorNombreParcial(const string& texto) {
+        Lista<Producto> resultados;
 
         for (int i = 0; i < productos.getTamaño(); i++) {
             Producto p = productos.obtenerEnPosicion(i);
@@ -245,7 +283,7 @@ public:
     }
 
     // Filtrar productos con lambda
-    ListaMenu<Producto> filtrarProductos(function<bool(const Producto&)> condicion) const {
+    Lista<Producto> filtrarProductos(function<bool(const Producto&)> condicion) const {
         return productos.filtrar(condicion);
     }
 
@@ -268,10 +306,10 @@ public:
     string getNombreCarta() const { return nombreCarta; }
 
     // Obtener lista completa de productos 
-    const ListaMenu<Producto>& getProductos() const { return productos; }
+    const Lista<Producto>& getProductos() const { return productos; }
 
     // Cargar productos desde otra lista (para CartaLocal/Delivery)
-    virtual void cargarProductos(const ListaMenu<Producto>& productosExternos) {
+    virtual void cargarProductos(const Lista<Producto>& productosExternos) {
         productos = productosExternos;
     }
 

@@ -139,13 +139,14 @@
     <ClInclude Include="Factura.hpp" />
     <ClInclude Include="Fridays.hpp" />
     <ClInclude Include="Funcionalidades.hpp" />
+    <ClInclude Include="GeneradorDataSet.hpp" />
     <ClInclude Include="GestorArchivos.hpp" />
     <ClInclude Include="GestorOrdenamiento.hpp" />
     <ClInclude Include="GestorPagos.hpp" />
     <ClInclude Include="GestorPedidos.hpp" />
     <ClInclude Include="GestorReserva.hpp" />
     <ClInclude Include="HashTable.hpp" />
-    <ClInclude Include="ListaMenu.hpp" />
+    <ClInclude Include="Lista.hpp" />
     <ClInclude Include="Mesa.hpp" />
     <ClInclude Include="Nodo.hpp" />
     <ClInclude Include="Pago.hpp" />

@@ -6,16 +6,16 @@
 using namespace std;
 
 template<typename T>
-class ListaMenu {
+class Lista {
 private:
     Nodo<T>* cabeza;
     Nodo<T>* cola;
     int tamaño;
 
 public:
-    ListaMenu() : cabeza(nullptr), cola(nullptr), tamaño(0) {}
+    Lista() : cabeza(nullptr), cola(nullptr), tamaño(0) {}
 
-    ListaMenu(const ListaMenu<T>& otra) : cabeza(nullptr), cola(nullptr), tamaño(0) {
+    Lista(const Lista<T>& otra) : cabeza(nullptr), cola(nullptr), tamaño(0) {
         Nodo<T>* actual = otra.cabeza;
         while (actual != nullptr) {
             insertarFinal(actual->getData());
@@ -23,11 +23,11 @@ public:
         }
     }
 
-    ~ListaMenu() {
+    ~Lista() {
         limpiar();
     }
 
-    ListaMenu<T>& operator=(const ListaMenu<T>& otra) {
+    Lista<T>& operator=(const Lista<T>& otra) {
         if (this != &otra) {
             limpiar();
             Nodo<T>* actual = otra.cabeza;
@@ -242,6 +242,34 @@ public:
         return actual->getData();
     }
 
+
+    // Obtener referencia para modificar el elemento directamente
+    T& obtenerReferencia(int posicion) {
+        if (posicion < 0 || posicion >= tamaño) {
+            cout << "Posicion fuera de rango" << endl;
+            throw out_of_range("Posicion fuera de rango");
+        }
+
+        Nodo<T>* actual;
+
+        if (posicion < tamaño / 2) {
+            actual = cabeza;
+            for (int i = 0; i < posicion; i++) {
+                actual = actual->getSiguiente();
+            }
+        }
+        else {
+            actual = cola;
+            for (int i = tamaño - 1; i > posicion; i--) {
+                actual = actual->getAnterior();
+            }
+        }
+
+        return actual->getDataRef();
+    }
+
+
+
     T obtenerPrimero() const {
         if (cabeza == nullptr) {
             cout << "Lista vacia" << endl;
@@ -288,8 +316,8 @@ public:
         cout << " -> NULL" << endl;
     }
 
-    ListaMenu<T> filtrar(function<bool(const T&)> condicion) const {
-        ListaMenu<T> resultado;
+    Lista<T> filtrar(function<bool(const T&)> condicion) const {
+        Lista<T> resultado;
         Nodo<T>* actual = cabeza;
 
         while (actual != nullptr) {

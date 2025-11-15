@@ -75,7 +75,6 @@ public:
 
 
     void ejecutar() {
-        inicializarSistema();
         GestorPedidos::cargarHistorial(historialPedidos, contadorPedidos);
         int opcion;
         do {
@@ -95,14 +94,6 @@ public:
             }
         } while (opcion != 3);
     }
-
-
-    // Inicializar sistema con datos predeterminados
-    void inicializarSistema() {
-        cout << ">>> Inicializando sistema Fridays..." << endl;
-        cout << ">>> Sistema listo" << endl;
-    }
-
 
     void limpiarPantalla() {
         system("cls");
@@ -219,10 +210,12 @@ public:
                 char resp;
                 cin >> resp;
                 cin.ignore(10000, '\n');
+                
 
                 if (resp == 's' || resp == 'S') {
                     Producto* p = seleccionarProductoPorID(carta);
                     if (p != nullptr) {
+                        
                         pedidoActual->agregarProducto(p);
                         cout << VERDE << "Producto agregado al carrito!" << endl;
                     }
@@ -364,7 +357,7 @@ public:
 
         delete cliente;
         pausar();
-    }
+    } 
 
     //modo administrador
     void modoAdministrador() {
@@ -375,6 +368,7 @@ public:
             cout << ROJO << "        PANEL ADMINISTRADOR" << endl;
             imprimirSeparadorRojoBlanco(20);
             cout << BLANCO;
+            cout << endl;
             cout << "  1. Gestion de Pedidos" << endl;
             cout << "  2. Gestion de Menu" << endl;
             cout << "  3. Gestion de Reservas" << endl;
@@ -468,7 +462,8 @@ public:
             cout << "  3. Agregar producto" << endl;
             cout << "  4. Eliminar producto" << endl;
             cout << "  5. Buscar producto" << endl;
-            cout << "  6. Volver al menu principal" << endl;
+            cout << "  6. Modificar producto" << endl;
+            cout << "  7. Volver al menu principal" << endl;
             cout << endl;
             imprimirSeparadorRojoBlanco(20);
             cout << AMARILLO << "Opcion: " << BLANCO;
@@ -647,7 +642,7 @@ public:
                     cout << "\nIngrese parte del nombre: ";
                     getline(cin, texto);
 
-                    ListaMenu<Producto> resultados = getMenu()->buscarPorNombreParcial(texto);
+                    Lista<Producto> resultados = getMenu()->buscarPorNombreParcial(texto);
 
                     if (!resultados.estaVacia()) {
                         cout << VERDE << "\n>>> Resultados (" << resultados.getTamaño() << "):" << RESET << endl;
@@ -691,6 +686,92 @@ public:
             }
 
             case 6:
+            {
+                limpiarPantalla();
+                cout << ROJO << "MODIFICAR PRODUCTO" << endl;
+                imprimirSeparadorRojoBlanco(20);
+
+                int id;
+                cout << "\nIngrese ID del producto a modificar: ";
+                cin >> id;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                // Buscar el producto
+                Producto* producto = getMenu()->buscarPlato(id);
+                if (producto == nullptr) {
+                    cout << ROJO << "\n Error: Producto no encontrado" << RESET << endl;
+                    pausar();
+                    break;
+                }
+
+                // Mostrar datos actuales
+                cout << VERDE << "\n>>> Producto encontrado:" << RESET << endl;
+                cout << "ID: " << producto->getId() << endl;
+                cout << "Nombre actual: " << producto->getNombre() << endl;
+                cout << "Precio actual: S/" << fixed << setprecision(2) << producto->getPrecio() << endl;
+                cout << "Categoria actual: " << producto->getCategoria() << endl;
+                cout << "Disponible: " << (producto->isDisponible() ? "Si" : "No") << endl;
+                cout << endl;
+
+                // Solicitar nuevos datos
+                string nuevoNombre;
+                double nuevoPrecio;
+                string nuevaCategoria;
+                char disponible;
+
+                cout << AMARILLO << ">>> Ingrese los nuevos datos:" << RESET << endl;
+                cout << "Nuevo nombre (Enter para mantener actual): ";
+                getline(cin, nuevoNombre);
+                if (nuevoNombre.empty()) {
+                    nuevoNombre = producto->getNombre();
+                }
+
+                cout << "Nuevo precio (0 para mantener actual): ";
+                cin >> nuevoPrecio;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                if (nuevoPrecio <= 0) {
+                    nuevoPrecio = producto->getPrecio();
+                }
+
+                cout << "Nueva categoria (plato/bebida/postre, Enter para mantener actual): ";
+                getline(cin, nuevaCategoria);
+                if (nuevaCategoria.empty()) {
+                    nuevaCategoria = producto->getCategoria();
+                }
+
+                cout << "¿Disponible? (s/n): ";
+                cin >> disponible;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                bool nuevaDisponibilidad = (disponible == 's' || disponible == 'S');
+
+                // Confirmar modificación
+                cout << "\n¿Confirmar modificacion? (s/n): ";
+                char confirmar;
+                cin >> confirmar;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                if (confirmar == 's' || confirmar == 'S') {
+                    bool exito = getMenu()->modificarProducto(id, nuevoNombre, nuevoPrecio,
+                        nuevaCategoria, nuevaDisponibilidad);
+                    if (exito) {
+                        this->guardarDatos();
+                        cout << VERDE << "\n Producto modificado exitosamente!" << RESET << endl;
+                    }
+                    else {
+                        cout << ROJO << "\n Error al modificar producto" << RESET << endl;
+                    }
+                }
+                else {
+                    cout << "\nOperacion cancelada." << endl;
+                }
+
+                delete producto;
+                pausar();
+                break;
+
+            }
+              
+            case 7:
                 break;
 
             default:
@@ -698,7 +779,7 @@ public:
                 pausar();
                 break;
             }
-        } while (opcion != 6);
+        } while (opcion != 7);
     }
 
     // Submenú: Gestión de Reservas

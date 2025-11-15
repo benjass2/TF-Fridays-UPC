@@ -3,7 +3,7 @@
 #include "Reserva.hpp"
 #include "Mesa.hpp"
 #include "Cliente.hpp"
-#include "ListaMenu.hpp"
+#include "Lista.hpp"
 #include "GestorArchivos.hpp"
 #include "Funcionalidades.hpp"
 using namespace ConsolaColor;
@@ -11,7 +11,7 @@ using namespace ConsolaColor;
 class GestorReserva {
 private:
     ArbolBST<Reserva> arbolReservas;
-    ListaMenu<Mesa> mesas;
+    Lista<Mesa> mesas;
 
 public:
 

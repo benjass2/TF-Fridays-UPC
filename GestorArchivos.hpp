@@ -1,5 +1,5 @@
 #pragma once
-#include "ListaMenu.hpp"
+#include "Lista.hpp"
 #include "Producto.hpp"
 #include "ArbolBST.hpp"
 #include "Reserva.hpp"
@@ -22,7 +22,7 @@ class GestorArchivos {
 public:
 
 
-    static void guardarProductos(const ListaMenu<Producto>& productos, const string& archivo) {
+    static void guardarProductos(const Lista<Producto>& productos, const string& archivo) {
         ofstream file(archivo);
 
         if (!file.is_open()) {
@@ -45,8 +45,8 @@ public:
         file.close();
     }
 
-    static ListaMenu<Producto> cargarProductos(const string& archivo) {
-        ListaMenu<Producto> productos;
+    static Lista<Producto> cargarProductos(const string& archivo) {
+        Lista<Producto> productos;
         ifstream file(archivo);
 
         if (!file.is_open()) {
@@ -189,7 +189,7 @@ public:
     // MÉTODOS PARA MESAS (NUEVOS)
     // ========================================
 
-    static void guardarMesas(const ListaMenu<Mesa>& mesas, const string& archivo = "Data/mesas.txt") {
+    static void guardarMesas(const Lista<Mesa>& mesas, const string& archivo = "Data/mesas.txt") {
         ofstream file(archivo);
 
         if (!file.is_open()) {
@@ -212,8 +212,8 @@ public:
         file.close();
     }
 
-    static ListaMenu<Mesa> cargarMesas(const string& archivo = "Data/mesas.txt") {
-        ListaMenu<Mesa> mesas;
+    static Lista<Mesa> cargarMesas(const string& archivo = "Data/mesas.txt") {
+        Lista<Mesa> mesas;
         ifstream file(archivo);
 
         if (!file.is_open()) {

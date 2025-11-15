@@ -95,7 +95,7 @@
     <ClInclude Include="HashTable.hpp">
       <Filter>Archivos de encabezado\Estructura de Datos</Filter>
     </ClInclude>
-    <ClInclude Include="ListaMenu.hpp">
+    <ClInclude Include="Lista.hpp">
       <Filter>Archivos de encabezado\Estructura de Datos</Filter>
     </ClInclude>
     <ClInclude Include="Nodo.hpp">
@@ -135,6 +135,9 @@
       <Filter>Archivos de encabezado\Servicio</Filter>
     </ClInclude>
     <ClInclude Include="GestorOrdenamiento.hpp">
+      <Filter>Archivos de encabezado\Reporte</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneradorDataSet.hpp">
       <Filter>Archivos de encabezado\Reporte</Filter>
     </ClInclude>
   </ItemGroup>
